@@ -68,3 +68,100 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def add(num1, num2):
+    return num1 + num2
+
+def subtract(num1, num2):
+    return num1 - num2
+
+def multiply(num1, num2):
+    return num1 * num2
+
+def divide(num1, num2):
+    if num2 == 0:
+        return "Error: Cannot divide by zero."
+    return round(num1 / num2, 2)
+
+def modulus(num1, num2):
+    if num2 == 0:
+        return "Error: Cannot divide by zero."
+    return num1 % num2
+
+def exponentiate(num1, num2):
+    return num1 ** num2
+
+def get_numbers():
+    try:
+        n1 = float(input("Enter first number : "))
+        n2 = float(input("Enter second number: "))  
+    except ValueError:
+        print("Error: Invalid entry. Please enter numbers only.")
+        return None, None
+
+def format_num(val):
+    """Helper function to cleanly drop trailing .0 for matching task specs"""
+    if isinstance(val, (int, float)) and val.is_integer():
+        return int(val)
+    return val
+
+def main():
+    while True:
+        print("\n============================")
+        print("     SIMPLE CALCULATOR")
+        print("============================")
+        print("1. Addition")
+        print("2. Subtraction")
+        print("3. Multiplication")
+        print("4. Division")
+        print("5. Modulus")
+        print("6. Exponentiation")
+        print("7. Quit")
+
+        choice = input("Select an operation (1-7): ")
+
+        if choice == '7':
+            print("Goodbye!")
+            break
+
+        
+        if choice in ["1", "2", "3", "4", "5", "6"]:
+            num1, num2 = get_numbers()
+            if num1 is None:
+                continue
+            n1_fmt = format_num(num1)
+            n2_fmt = format_num(num2)
+            
+            if choice == '1':
+                result = add(num1, num2)
+                print(f"Result: {n1_fmt} + {n2_fmt} = {format_num(result)}")
+
+            elif choice == '2':
+                result = subtract(num1, num2)
+                print(f"Result: {n1_fmt} - {n2_fmt} = {format_num(result)}")
+
+            elif choice == '3':
+                result = multiply(num1, num2)
+                print(f"Result: {n1_fmt} * {n2_fmt} = {format_num(result)}")
+
+            elif choice == '4':
+                result = divide(num1, num2)
+                if isinstance(result, str):
+                    print(result)
+                else:
+                    print(f"Result: {n1_fmt} / {n2_fmt} = {format_num(result)}")
+
+            elif choice == '5':
+                result = modulus(num1, num2)
+                if isinstance(result, str):
+                    print(result)
+                else:
+                    print(f"Result: {n1_fmt} % {n2_fmt} = {format_num(result)}")
+                    
+            elif choice == '6':
+                result = exponentiate(num1, num2)
+                print(f"Result: {n1_fmt} ** {n2_fmt} = {format_num(result)}")  
+        else:
+            print("Error: Invalid choice. Please enter a number between 1 and 7.")
+
+if __name__ == "__main__":
+    main()
